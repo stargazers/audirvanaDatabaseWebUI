@@ -9,7 +9,7 @@
 		<title>Audirvana albums</title>
 		<meta charset="utf-8" />
 		<style>
-			img { width: 150px; }
+			img { width: 100%; max-width: 150px; }
 			li { list-style-type: none; }
 			.album-container { margin-top: 20px; }
 			.artist { font-weight: bold; }
@@ -42,19 +42,19 @@
 			<!-- Right side, the actual content -->
 			<div class="col-md-10">
 				<div class="row album-container" ng-repeat="album in albums | orderBy:orderProp | filter:filterVal as filteredValues">
-					<div class="col-md-2 cover">
+					<div class="col-md-2 col-xs-4 cover">
 						<img src="{{album.cover}}" />
 					</div>
 
-					<div class="col-md-2 artist">
+					<div class="col-md-2 col-xs-8 artist">
 						<span class="arist_name">{{album.ZALBUMARTISTSNAMES}}</span>
 					</div>
 
-					<div class="col-md-2 album">
+					<div class="col-md-2 col-xs-8 album">
 						<span class="album_name">{{album.ZTITLE}}</span>
 					</div>
 
-					<div class="col-md-6 tracklist">
+					<div class="col-md-6 col-xs-8 tracklist">
 						<ul>
 							<li ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
 								{{track.number}}. {{track.title}} ({{track.playcount}})
