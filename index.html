@@ -63,7 +63,7 @@
 					<div class="col-md-6 col-xs-8 tracklist">
 						<ul>
 							<li ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
-								{{track.number}}. {{track.title}} ({{track.playcount}})
+								<a href="{{track.url}}">{{track.number}}. {{track.title}} ({{track.playcount}})</a>
 							</li>
 						</ul>
 					</div>
