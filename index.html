@@ -3,24 +3,24 @@
 <html lang="fi-FI">
 	<head>
   		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<script src="audirvanaCtrl.js"></script>
 		<title>Audirvana albums</title>
 		<meta charset="utf-8" />
 		<style>
-			td img { width: 100px; }
-			td li { list-style-type: none; }
-			thead { text-align: center; }
-			.tracklist { width: 100%; }
-			.track_no { width: 10%; }
-			.track_title { width: 80%; }
-			.track_playcount { width: 10%; }
-			.tracklist_container { width: 50%; }
+			img { width: 150px; }
+			li { list-style-type: none; }
+			.album-container { margin-top: 20px; }
+			.artist { font-weight: bold; }
+			.album { font-weight: bold; }
 		</style>
 	</head>
 
 	<body ng-app="audirvanaApp" ng-controller="AudirvanaAppCtrl">
 		<div class="container-fluid">
+		<div class="row">
+			<!-- Left side searches -->
 			<div class="col-md-2">
 				<h1>View options</h1>
 				Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"><br><br>
@@ -29,58 +29,41 @@
 				<!--<input ng-model="filterVal.$">-->
 
 				Sort by:
-			<select ng-model="orderProp">
-				<option value="ZALBUMARTISTSNAMES">Artist</option>
-				<option value="ZTITLE">Album</option>
-			</select>
+				<select ng-model="orderProp">
+					<option value="ZALBUMARTISTSNAMES">Artist</option>
+					<option value="ZTITLE">Album</option>
+				</select>
 
-			 <p>Total albums: {{albums.length}}</p>
-			 <p>Shown: {{filteredValues.length}}</p>
+			 	<p>Total albums: {{albums.length}}</p>
+			 	<p>Shown: {{filteredValues.length}}</p>
 			</div>
 
-			<div class="col-md-10">
-				<div class="table-responsive">
-				<table class="table table-condensed">
-				  	<thead>
-					<tr>
-						<th>Cover art</th>
-				    	<th>Artist</th>
-						<th>Album</th>
-						<th>Tracklist</th>
-					</tr>
-				  	</thead>
 
-					<tbody ng-repeat="album in albums | orderBy:orderProp | filter: filterVal as filteredValues">
-					<tr>
-						<td><img src="{{album.cover}}"></td>
-						<td>{{album.ZALBUMARTISTSNAMES}}</td>
-						<td>{{album.ZTITLE}}</td>
-						<td class="tracklist_container">
-						  	<ul>
-								<table class="tracklist">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Title</th>
-											<th>Playcount</th>
-										</tr>
-									</thead>
-									<tbody ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
-										<tr>
-										<td class="track_no">{{track.number}}</td>
-										<td class="track_title">{{track.title}}</td>
-										<td class="track_playcount">{{track.playcount}}</td>
-										<td>
-										</tr>
-									</tbody>
-								</table>
-							</ul>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+			<!-- Right side, the actual content -->
+			<div class="col-md-10">
+				<div class="row album-container" ng-repeat="album in albums | orderBy:orderProp | filter:filterVal as filteredValues">
+					<div class="col-md-2 cover">
+						<img src="{{album.cover}}" />
+					</div>
+
+					<div class="col-md-2 artist">
+						<span class="arist_name">{{album.ZALBUMARTISTSNAMES}}</span>
+					</div>
+
+					<div class="col-md-2 album">
+						<span class="album_name">{{album.ZTITLE}}</span>
+					</div>
+
+					<div class="col-md-6 tracklist">
+						<ul>
+							<li ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
+								{{track.number}}. {{track.title}} ({{track.playcount}})
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 
 	</body>
