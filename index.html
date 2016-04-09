@@ -9,6 +9,7 @@
 		<meta charset="utf-8" />
 		<style>
 			td img { width: 100px; }
+			td li { list-style-type: none; }
 		</style>
 	</head>
 
@@ -16,8 +17,10 @@
 		<div class="container-fluid">
 			<div class="col-md-2">
 				<h1>View options</h1>
-				Filter: <input ng-model="filterVal">
-				<!--Track search: <input ng-model="trackFilter">-->
+				Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"><br><br>
+				Album search: <input ng-model="filterVal.ZTITLE"><br /><br />
+				Track search: <input ng-model="filterVal.tracks"><br><br>
+				<!--<input ng-model="filterVal.$">-->
 
 				Sort by:
 			<select ng-model="orderProp">
@@ -48,7 +51,7 @@
 						<td>{{album.ZTITLE}}</td>
 						<td>
 						  	<ul>
-						  		<li ng-repeat="track in album.tracks | filter: trackFilter">{{track}}</li>
+						  		<li ng-repeat="track in album.tracks | filter: filterVal.tracks">{{track}}</li>
 							</ul>
 						</td>
 					</tr>

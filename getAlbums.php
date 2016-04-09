@@ -15,7 +15,7 @@
 		$tracks = '';
 
 		while( $track_row = $track_ret->fetchArray())
-			$tracks[] = $track_row['ZTITLE'];
+			$tracks[] = $track_row['ZTRACKNUMBER'] . '. ' . $track_row['ZTITLE'];
 
 		$filename = $row['ZALBUMARTISTSNAMES'] . '-' . $row['ZTITLE'];
 		$filename = str_replace( ' ', '_', $filename );
