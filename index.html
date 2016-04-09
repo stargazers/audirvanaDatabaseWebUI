@@ -58,6 +58,13 @@
 						<td class="tracklist_container">
 						  	<ul>
 								<table class="tracklist">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Title</th>
+											<th>Playcount</th>
+										</tr>
+									</thead>
 									<tbody ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
 										<tr>
 										<td class="track_no">{{track.number}}</td>
