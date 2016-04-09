@@ -10,10 +10,13 @@
 		<meta charset="utf-8" />
 		<style>
 			img { width: 100%; max-width: 150px; }
-			li { list-style-type: none; }
+			li { list-style-type: none; margin-top: 10px; }
 			.album-container { margin-top: 20px; }
 			.artist { font-weight: bold; }
 			.album { font-weight: bold; }
+			.tracklist li { margin-top: 0px; }
+			.infotext { font-weight: bold; }
+			input { display: block; }
 		</style>
 	</head>
 
@@ -27,17 +30,17 @@
 					<li>Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"></li>
 					<li>Album search: <input ng-model="filterVal.ZTITLE"></li>
 					<li>Track search: <input ng-model="filterVal.tracks.title"></li>
-				<!--<input ng-model="filterVal.$">-->
+					<!--<input ng-model="filterVal.$">-->
 
 					<li>Sort by:
-					<select ng-model="orderProp">
-						<option value="ZALBUMARTISTSNAMES">Artist</option>
-						<option value="ZTITLE">Album</option>
-					</select>
+						<select ng-model="orderProp">
+							<option value="ZALBUMARTISTSNAMES">Artist</option>
+							<option value="ZTITLE">Album</option>
+						</select>
 					</li>
 
-			 	<li><p>Total albums: {{albums.length}}</p></li>
-			 	<li><p>Shown: {{filteredValues.length}}</p></li>
+			 	<li class="infotext"><p>Total albums: {{albums.length}}</p></li>
+			 	<li class="infotext"><p>Shown: {{filteredValues.length}}</p></li>
 				</ul>
 			</div>
 
