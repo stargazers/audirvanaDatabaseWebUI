@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="fi-FI">
+	<head>
+  		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="audirvanaCtrl.js"></script>
+		<title>Audirvana albums</title>
+		<meta charset="utf-8" />
+		<style>
+		</style>
+	</head>
+
+	<body ng-app="audirvanaApp" ng-controller="AudirvanaAppCtrl">
+		<div class="container-fluid">
+			<div class="col-md-2">
+				<h1>View options</h1>
+				Filter: <input ng-model="filterVal">
+
+				Sort by:
+			<select ng-model="orderProp">
+				<option value="ZALBUMARTISTSNAMES">Artist</option>
+				<option value="ZTITLE">Album</option>
+			</select>
+
+			 <p>Total albums: {{albums.length}}</p>
+			 <p>Shown: {{filteredValues.length}}</p>
+			</div>
+
+			<div class="col-md-10">
+				<div class="table-responsive">
+				<table class="table table-condensed">
+				  	<thead>
+					<tr>
+				    	<th>Artist</th>
+						<th>Album</th>
+						<th>Tracklist</th>
+					</tr>
+				  	</thead>
+
+					<tbody ng-repeat="album in albums | orderBy:orderProp | filter: filterVal as filteredValues">
+					<tr>
+						<td><img src="{{album.cover}}"></td>
+						<td>{{album.ZALBUMARTISTSNAMES}}</td>
+						<td>{{album.ZTITLE}}</td>
+						<td>Tracklist</td>
+					</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
