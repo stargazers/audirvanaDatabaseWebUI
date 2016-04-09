@@ -16,6 +16,7 @@
 		$filename = str_replace( '/', '_', $filename );
 		$filename = str_replace( 'ä', 'a', $filename );
 		$filename = str_replace( 'ö', 'o', $filename );
+		$filename = str_replace( '?', '_', $filename );
 		$filename .= '.jpg';
 		$filename = strtolower( $filename );
 

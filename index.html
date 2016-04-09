@@ -21,26 +21,29 @@
 		<div class="container-fluid">
 		<div class="row">
 			<!-- Left side searches -->
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<h1>View options</h1>
-				Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"><br><br>
-				Album search: <input ng-model="filterVal.ZTITLE"><br /><br />
-				Track search: <input ng-model="filterVal.tracks.title"><br><br>
+				<ul>
+					<li>Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"></li>
+					<li>Album search: <input ng-model="filterVal.ZTITLE"></li>
+					<li>Track search: <input ng-model="filterVal.tracks.title"></li>
 				<!--<input ng-model="filterVal.$">-->
 
-				Sort by:
-				<select ng-model="orderProp">
-					<option value="ZALBUMARTISTSNAMES">Artist</option>
-					<option value="ZTITLE">Album</option>
-				</select>
+					<li>Sort by:
+					<select ng-model="orderProp">
+						<option value="ZALBUMARTISTSNAMES">Artist</option>
+						<option value="ZTITLE">Album</option>
+					</select>
+					</li>
 
-			 	<p>Total albums: {{albums.length}}</p>
-			 	<p>Shown: {{filteredValues.length}}</p>
+			 	<li><p>Total albums: {{albums.length}}</p></li>
+			 	<li><p>Shown: {{filteredValues.length}}</p></li>
+				</ul>
 			</div>
 
 
 			<!-- Right side, the actual content -->
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<div class="row album-container" ng-repeat="album in albums | orderBy:orderProp | filter:filterVal as filteredValues">
 					<div class="col-md-2 col-xs-4 cover">
 						<img src="{{album.cover}}" />
