@@ -10,6 +10,12 @@
 		<style>
 			td img { width: 100px; }
 			td li { list-style-type: none; }
+			thead { text-align: center; }
+			.tracklist { width: 100%; }
+			.track_no { width: 10%; }
+			.track_title { width: 80%; }
+			.track_playcount { width: 10%; }
+			.tracklist_container { width: 50%; }
 		</style>
 	</head>
 
@@ -19,7 +25,7 @@
 				<h1>View options</h1>
 				Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"><br><br>
 				Album search: <input ng-model="filterVal.ZTITLE"><br /><br />
-				Track search: <input ng-model="filterVal.tracks"><br><br>
+				Track search: <input ng-model="filterVal.tracks.title"><br><br>
 				<!--<input ng-model="filterVal.$">-->
 
 				Sort by:
@@ -49,9 +55,18 @@
 						<td><img src="{{album.cover}}"></td>
 						<td>{{album.ZALBUMARTISTSNAMES}}</td>
 						<td>{{album.ZTITLE}}</td>
-						<td>
+						<td class="tracklist_container">
 						  	<ul>
-						  		<li ng-repeat="track in album.tracks | filter: filterVal.tracks">{{track}}</li>
+								<table class="tracklist">
+									<tbody ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
+										<tr>
+										<td class="track_no">{{track.number}}</td>
+										<td class="track_title">{{track.title}}</td>
+										<td class="track_playcount">{{track.playcount}}</td>
+										<td>
+										</tr>
+									</tbody>
+								</table>
 							</ul>
 						</td>
 					</tr>

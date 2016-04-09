@@ -10,12 +10,18 @@
 
 	while( $row = $ret->fetchArray())
 	{
-		$q = 'SELECT ZTRACKNUMBER, ZTITLE FROM ZTRACK WHERE ZALBUM="' . $row['Z_PK'] . '" ORDER BY ZTRACKNUMBER';
+		$q = 'SELECT ZTRACKNUMBER, ZPLAYCOUNT, ZTITLE FROM ZTRACK WHERE ZALBUM="' . $row['Z_PK'] . '" ORDER BY ZTRACKNUMBER';
 		$track_ret = $db->query( $q );
 		$tracks = '';
 
 		while( $track_row = $track_ret->fetchArray())
-			$tracks[] = $track_row['ZTRACKNUMBER'] . '. ' . $track_row['ZTITLE'];
+		{
+			$track['number'] = $track_row['ZTRACKNUMBER'];
+			$track['title'] = $track_row['ZTITLE'];
+			$track['playcount'] = $track_row['ZPLAYCOUNT'];
+
+			$tracks[] = $track;
+		}
 
 		$filename = $row['ZALBUMARTISTSNAMES'] . '-' . $row['ZTITLE'];
 		$filename = str_replace( ' ', '_', $filename );
