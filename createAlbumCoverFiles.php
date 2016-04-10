@@ -1,5 +1,7 @@
 <?php
 
+	require 'shared_functions.php';
+
 	$cover_images_path = 'covers/';
 
 	if(! file_exists( $cover_images_path ) )
@@ -11,18 +13,15 @@
 
 	while( $row = $ret->fetchArray())
 	{
-		$filename = $row['ZALBUMARTISTSNAMES'] . '-' . $row['ZTITLE'];
-		$filename = str_replace( ' ', '_', $filename );
-		$filename = str_replace( '/', '_', $filename );
-		$filename = str_replace( 'ä', 'a', $filename );
-		$filename = str_replace( 'ö', 'o', $filename );
-		$filename = str_replace( '?', '_', $filename );
-		$filename .= '.jpg';
-		$filename = strtolower( $filename );
+		$filename = get_album_cover_filename( $row );
+		$filename = $cover_images_path . strtolower( $filename );
 
-		$fh = fopen( $cover_images_path . $filename, 'w' );
-		fwrite( $fh, $row['ZARTWORKVIGNETTE'] );
-		fclose( $fh );
+		if(! file_exists( $filename ) )
+		{
+			$fh = fopen( $filename, 'w' );
+			fwrite( $fh, $row['ZARTWORKVIGNETTE'] );
+			fclose( $fh );
+		}
 	}
 
 ?>

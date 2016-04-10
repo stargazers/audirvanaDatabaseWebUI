@@ -1,12 +1,14 @@
 <?php
 
+	require 'shared_functions.php';
+
 	$cover_images_path = 'covers/';
+
+	// For str_replace so we can return real URL
 	$original_path = 'Users/stargazers/Music/';
 	$new_path = 'http://media.korpilaakso.net/';
 
-	$db = new SQLite3( 'AudirvanaPlusLibrary.sqlite', true )
-		or die( "Fuck this shit" );
-
+	$db = new SQLite3( 'AudirvanaPlusLibrary.sqlite', true );
 	$q = 'SELECT Z_PK, ZALBUMARTISTSNAMES, ZTITLE FROM ZALBUM';
 	$ret = $db->query( $q );
 
@@ -33,15 +35,8 @@
 			$tracks[] = $track;
 		}
 
-		$filename = $row['ZALBUMARTISTSNAMES'] . '-' . $row['ZTITLE'];
-		$filename = str_replace( ' ', '_', $filename );
-		$filename = str_replace( '/', '_', $filename );
-		$filename = str_replace( 'ä', 'a', $filename );
-		$filename = str_replace( 'ö', 'o', $filename );
-		$filename = str_replace( '?', '_', $filename );
-		$filename .= '.jpg';
-		$filename = strtolower( $filename );
-
+		$filename = get_album_cover_filename( $row );
+			
 		$row['cover'] = $cover_images_path . $filename;
 		$row['tracks'] = $tracks; 
 		
