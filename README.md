@@ -4,6 +4,7 @@ Web interface for Audirvana database
 This generates a website, where it lists all the albums which it founds from Audirvana application database.
 
 LICENSE: GNU AGPL v3
+Live demonstration: http://korpilaakso.net/coding/angular/audirvana/
 
 INSTALL
 ========
