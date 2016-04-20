@@ -15,6 +15,7 @@
 			.artist { font-weight: bold; }
 			.album { font-weight: bold; }
 			.tracklist li { margin-top: 0px; }
+			.catalog_no { display: block; margin-top: 5px; margin-bottom: 5px; font-style: italic; }
 			.infotext { font-weight: bold; }
 			input { display: block; }
 
@@ -34,17 +35,23 @@
 					<li>Artist search: <input ng-model="filterVal.ZALBUMARTISTSNAMES"></li>
 					<li>Album search: <input ng-model="filterVal.ZTITLE"></li>
 					<li>Track search: <input ng-model="filterVal.tracks.title"></li>
+					<li>Catalogue no search: <input ng-model="filterVal.catalog_no"></li>
 					<!--<input ng-model="filterVal.$">-->
 
 					<li>Sort by:
 						<select ng-model="orderProp">
 							<option value="ZALBUMARTISTSNAMES">Artist</option>
 							<option value="ZTITLE">Album</option>
+							<option value="catalog_no">Catalogue no.</option>
 						</select>
 					</li>
+				</ul>
 
-			 	<li class="infotext"><p>Total albums: {{albums.length}}</p></li>
-			 	<li class="infotext"><p>Shown: {{filteredValues.length}}</p></li>
+				<h3>Additional information</h3>
+				<ul>
+					<li class="infotext"><p>Total albums: {{albums.length}}</p></li>
+					<li class="infotext"><p>Shown: {{filteredValues.length}}</p></li>
+					<li class="infotext"><p>Version: {{appVersion}}</p></li>
 				</ul>
 			</div>
 
@@ -62,12 +69,14 @@
 
 					<div class="col-md-2 col-xs-8 album">
 						<span class="album_name">{{album.ZTITLE}}</span>
+						<span class="catalog_no" title="Album catalogue number">{{album.catalog_no}}</span>
 					</div>
 
 					<div class="col-md-6 col-xs-8 tracklist">
 						<ul>
 							<li ng-repeat="track in album.tracks | filter: filterVal.tracks.title">
-								<a href="{{track.url}}">{{track.number}}. {{track.title}} ({{track.playcount}})</a>
+								<a href="{{track.url}}">{{track.number}}. {{track.title}}</a>
+								<span title="Playcount">({{track.playcount}})</span>
 							</li>
 						</ul>
 					</div>

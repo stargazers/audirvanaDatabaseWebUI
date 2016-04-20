@@ -10,5 +10,7 @@ audirvanaApp.controller( 'AudirvanaAppCtrl', function( $scope, $http )
 		$scope.orderProp = 'ZALBUMARTISTSNAMES';
 	});
 
+	$scope.appVersion = '1.0';
+
 });
 

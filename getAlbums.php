@@ -89,9 +89,9 @@
 		public function getTracksForAlbum( $album_id )
 		{
 			// Get tracks for this album
-			$q = 'SELECT ZTRACKNUMBER, ZPLAYCOUNT, ZTITLE, ZLOCATIONRELPATH '
-				. 'FROM ZTRACK WHERE ZALBUM="' . $album_id. '"'
-				. 'ORDER BY ZTRACKNUMBER';
+			$q = 'SELECT ZTRACKNUMBER, ZCOMMENTS, ZPLAYCOUNT, ZTITLE, '
+				. 'ZLOCATIONRELPATH FROM ZTRACK WHERE ZALBUM="' 
+				. $album_id. '"' . 'ORDER BY ZTRACKNUMBER';
 
 			$track_ret = $this->db->query( $q );
 			$tracks = '';
@@ -107,6 +107,7 @@
 				$track['number'] = $track_row['ZTRACKNUMBER'];
 				$track['title'] = $track_row['ZTITLE'];
 				$track['playcount'] = $track_row['ZPLAYCOUNT'];
+				$track['comment'] = $track_row['ZCOMMENTS'];
 				$track['url'] = $file_url;
 
 				$tracks[] = $track;
@@ -130,6 +131,14 @@
 				$filename = $this->getAlbumCoverFilename( $row );
 				$row['cover'] = $this->covers_path . $filename;
 				$row['tracks'] = $tracks; 
+				$row['catalog_no'] = '';
+
+				// I add my own personal "catalog id" to track comments
+				// because I cannot add it to album infos. If we have a
+				// track 0 where is comment, set its value to catalog_no
+				if( isset( $tracks[0] ) && isset( $tracks[0]['comment'] ) )
+					$row['catalog_no'] = $tracks[0]['comment'];
+
 				$rows[] = $row;
 
 				// Generate cover art if required (and run this only once!)
